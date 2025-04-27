@@ -44,6 +44,13 @@ function fastDrawImage() {
 }
 ```
 
+The example that shows reduction from 2 sec to 100 ms after applying optimizations:
+
+<img src="./offloadedImageDecodingInProfiler.png">
+(Results from Chrome Profiler for Macbook M1, with 6x CPU throttling, ~7mb image data)
+<br />
+<br />
+
 ### License
 
 The MIT License (MIT)
