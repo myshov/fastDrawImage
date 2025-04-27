@@ -1,0 +1,36 @@
+<!--In this example image decoding doesn't block main thread in Chrome but not in Safari and Firefox-->
+<html>
+    <head>
+        <style>
+            #container {
+                width: 800px;
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="timer"></div>
+        <div class="canvasWrap">
+            <canvas id="canvas" width="800" height="600"></canvas>
+        </div>
+        <button onclick="loadImage()">Load image</button>
+        <script>
+            const timerContainer = document.getElementById('timer');
+            setInterval(() => {
+                timerContainer.innerHTML = +new Date();
+            }, 10);
+
+            const imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/2/21/%221ere_feuille_particuli%C3%A8re_du_Thibet%22_%28mention_ms%29_-_%28Anville%29_%3B_Deshulins_sculp._-_btv1b8491979b.jpg'
+            function loadImage() {
+                fetch(imageUrl)
+                    .then(image => image.blob())
+                    .then(blob => createImageBitmap(blob))
+                    .then(bitmap => {
+                        const canvas = document.getElementById('canvas');
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(bitmap, 0, 0);
+                    });
+            }
+        </script>
+    </body>
+</html>
