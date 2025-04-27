@@ -4,7 +4,8 @@ There are problems with cross browser support of [drawImage](https://developer.m
 
 <img src="./longImageDecodeTask.png">
 (Results from Chrome Profiler for Macbook M1, with 6x CPU throttling, ~7mb image data)
-
+<br />
+<br />
 
 It is tricky to avoid image decoding on the main thread, because if something works good in one browser it fails in another (check folder [examples](./examples) for my experiments). I haven't looked much in bug trackers, but looks like there are these issues:
 - Chrome always start decoding image event if it was explicitly decoded before with `.decode()` method
