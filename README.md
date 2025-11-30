@@ -32,12 +32,15 @@ function fastDrawImage() {
     } else {
         const image = new Image();
         image.decoding = "async";
-        image.onload = () => {
-            image.decode().then(() => {
-                const canvas = document.getElementById('canvas');
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(image, 0, 0);
-            });
+        image.onload = (r) => {
+            image
+                .decode()
+                .then(() => createImageBitmap(image))
+                .then(bitmap => {
+                    const canvas = document.getElementById('canvas');
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(bitmap, 0, 0);
+                });
         };
         image.src = imageUrl;
     }
